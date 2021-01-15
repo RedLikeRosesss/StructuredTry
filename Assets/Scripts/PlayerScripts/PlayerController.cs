@@ -19,8 +19,6 @@ public class PlayerController : MonoBehaviour
     internal PlayerAnimationContollerScript PlayerAnimationContollerScript;
     [SerializeField]
     internal PlayerDash PlayerDash;
-    [SerializeField]
-    internal PlayerCollecting PlayerCollecting;
 
     [Header("Components")]
     internal Rigidbody2D rb;
@@ -54,7 +52,6 @@ public class PlayerController : MonoBehaviour
         ModifyPlayerPhysics = gameObject.GetComponent<ModifyPlayerPhysics>();
         PlayerAnimationContollerScript = gameObject.GetComponent<PlayerAnimationContollerScript>();
         PlayerDash = gameObject.GetComponent<PlayerDash>();
-        PlayerCollecting = gameObject.GetComponent<PlayerCollecting>();
     }
 
     void Update()
