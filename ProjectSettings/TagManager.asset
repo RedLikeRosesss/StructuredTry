@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - BaseGround
+  - SlideGround
+  - SandGround
+  - WindZone
+  - MovingPlatform
+  - OneWayPlatform
+  - Sword
+  - Enemy
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Ground
+  - SlideGround
+  - SandGround
+  - Player
+  - MovingPlatform
+  - OneWayPlatform
+  - Ammo
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1610604283
+    locked: 0
+  - name: Ground
+    uniqueID: 189787337
+    locked: 0
+  - name: Items
+    uniqueID: 2606524223
+    locked: 0
+  - name: Character
+    uniqueID: 4189089467
+    locked: 0
