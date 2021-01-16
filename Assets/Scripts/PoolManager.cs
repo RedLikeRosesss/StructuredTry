@@ -26,24 +26,18 @@ public class PoolManager : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < projectileNumber; i++)
-        {
-            GameObject tempProjectile = (GameObject)Instantiate(projectilePrefab) as GameObject;
-            projectileList.Add(tempProjectile);
-            tempProjectile.transform.parent = this.transform;
-            tempProjectile.SetActive(false);
-        }
+
     }
         
 
     void Update()
     {
-        //Fire();
+
     }
 
     public void AddProjectile()
     {
-        if (projectileList.Count < 5)
+        if (projectileList.Count < projectileNumber)
         {
             GameObject tempProjectile = (GameObject)Instantiate(projectilePrefab) as GameObject;
             tempProjectile.transform.parent = this.transform;
