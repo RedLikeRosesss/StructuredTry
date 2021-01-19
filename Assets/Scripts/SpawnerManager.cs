@@ -12,8 +12,8 @@ public class SpawnerManager : MonoBehaviour
 
     private void Awake()
     {
-        var sword = Resources.Load<ProjectileBehaviourPooled>("Projectiles/LegendarySword");
-        projectilePrefab = (sword as ProjectileBehaviourPooled).gameObject;
+        var sword = Resources.Load<ProjectileBehaviour>("Projectiles/LegendarySword");
+        projectilePrefab = (sword as ProjectileBehaviour).gameObject;
         SpawnSword();
     }
 
