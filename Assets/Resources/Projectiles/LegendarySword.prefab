@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 956475198269611698}
   - component: {fileID: 3328581754208866479}
   - component: {fileID: 707153063}
-  - component: {fileID: 3089664572671490289}
   m_Layer: 14
   m_Name: LegendarySword
   m_TagString: Sword
@@ -131,16 +130,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &3089664572671490289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8059587653958490226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a2e98b535d39fb4087589e96cdb66d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 10
