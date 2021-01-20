@@ -9,7 +9,6 @@ public class PlayerCollecting : MonoBehaviour
         if (collision.gameObject.CompareTag("Sword"))
         {
             ProjectilesPool.Instance.AddProjectile(collision.gameObject);
-            //collision.gameObject.SetActive(false);
         }
     }
 }

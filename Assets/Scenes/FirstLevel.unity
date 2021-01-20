@@ -203,6 +203,55 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &13341442
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 13341443}
+  - component: {fileID: 13341444}
+  m_Layer: 11
+  m_Name: DanceOfSwords
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &13341443
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13341442}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1937794394}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &13341444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13341442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dae6c287b3d19814ba764c3f7d78ffb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileSpriteObjects: []
+  timeCounter: 0
+  speed: 0
+  size: 0
+  x: 0
+  y: 0
 --- !u!1 &18068027
 GameObject:
   m_ObjectHideFlags: 0
@@ -41197,6 +41246,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxNumberOfProjectiles: 0
+  count: 0
+  DanceOfProjectiles: {fileID: 0}
 --- !u!4 &1297041942
 Transform:
   m_ObjectHideFlags: 0
@@ -42140,6 +42191,75 @@ Transform:
   m_Father: {fileID: 1377999894}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &739036413683370678
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2929830170372541495, guid: 617e3aa61a38efd44b122eeed4d1eafb,
+        type: 3}
+      propertyPath: m_Name
+      value: LegendarySwordSprite
+      objectReference: {fileID: 0}
+    - target: {fileID: 3086699378295663734, guid: 617e3aa61a38efd44b122eeed4d1eafb,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3086699378295663734, guid: 617e3aa61a38efd44b122eeed4d1eafb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 165
+      objectReference: {fileID: 0}
+    - target: {fileID: 3086699378295663734, guid: 617e3aa61a38efd44b122eeed4d1eafb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3086699378295663734, guid: 617e3aa61a38efd44b122eeed4d1eafb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3086699378295663734, guid: 617e3aa61a38efd44b122eeed4d1eafb,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3086699378295663734, guid: 617e3aa61a38efd44b122eeed4d1eafb,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3086699378295663734, guid: 617e3aa61a38efd44b122eeed4d1eafb,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3086699378295663734, guid: 617e3aa61a38efd44b122eeed4d1eafb,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3086699378295663734, guid: 617e3aa61a38efd44b122eeed4d1eafb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3086699378295663734, guid: 617e3aa61a38efd44b122eeed4d1eafb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3086699378295663734, guid: 617e3aa61a38efd44b122eeed4d1eafb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 617e3aa61a38efd44b122eeed4d1eafb, type: 3}
 --- !u!1001 &1657470606720778608
 PrefabInstance:
   m_ObjectHideFlags: 0
