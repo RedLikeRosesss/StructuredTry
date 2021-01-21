@@ -7,13 +7,8 @@ using UnityEngine;
 public class ProjectilesPool : MonoBehaviour
 {
     [SerializeField]
-    private int maxNumberOfProjectiles;    
-
-    [Header("List")]
+    public int maxNumberOfProjectiles;
     List<GameObject> proprojectileList = new List<GameObject>();
-    public int count;
-
-    [Header("Scripts")]
     [SerializeField]
     internal DanceOfProjectiles DanceOfProjectiles;
 
@@ -29,21 +24,13 @@ public class ProjectilesPool : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
         maxNumberOfProjectiles = 5;
     }
 
     private void Start()
     {
-        DanceOfProjectiles = gameObject.GetComponent<DanceOfProjectiles>();
-    }
-
-    private void Update()
-    {
-        count = proprojectileList.Count;
-        /*if (Input.GetMouseButtonDown(0))
-        {
-            RemoveProjectile();
-        }*/
+        DanceOfProjectiles = FindObjectOfType<DanceOfProjectiles>();
     }
 
     public GameObject GetProjectile()
@@ -66,17 +53,9 @@ public class ProjectilesPool : MonoBehaviour
     {
         if (proprojectileList.Count < maxNumberOfProjectiles)
         {
-            AddToDance();
             projectileToAdd.SetActive(false);
             proprojectileList.Add(projectileToAdd);
         }
-    }
-
-    private void AddToDance()
-    {
-        if (DanceOfProjectiles.gameObject.activeSelf == false)
-        {
-            DanceOfProjectiles.gameObject.SetActive(true);
-        }
+        DanceOfProjectiles.ActivateSword();
     }
 }

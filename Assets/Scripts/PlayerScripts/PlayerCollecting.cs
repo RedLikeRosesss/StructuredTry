@@ -9,6 +9,7 @@ public class PlayerCollecting : MonoBehaviour
         if (collision.gameObject.CompareTag("Sword"))
         {
             ProjectilesPool.Instance.AddProjectile(collision.gameObject);
+            //ProjectilesPool.Instance.DanceOfProjectiles.ActivateSword();
         }
     }
 }
