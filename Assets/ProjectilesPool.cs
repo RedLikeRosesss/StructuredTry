@@ -12,6 +12,8 @@ public class ProjectilesPool : MonoBehaviour
     [SerializeField]
     internal DanceOfProjectiles DanceOfProjectiles;
 
+    public int count;
+
     public static ProjectilesPool Instance { get; private set; }
 
     private void Awake()
@@ -33,6 +35,11 @@ public class ProjectilesPool : MonoBehaviour
         DanceOfProjectiles = FindObjectOfType<DanceOfProjectiles>();
     }
 
+    private void Update()
+    {
+        count = proprojectileList.Count;
+    }
+
     public GameObject GetProjectile()
     {
         if (proprojectileList.Count > 0) {
@@ -45,17 +52,26 @@ public class ProjectilesPool : MonoBehaviour
     {
         if (proprojectileList != null)
         {
+            StartCoroutine(ChangeSwordTag(proprojectileList[0]));
             proprojectileList.RemoveAt(0);
         }
+        DanceOfProjectiles.DeactivateSword();
     }
 
     public void AddProjectile(GameObject projectileToAdd)
     {
         if (proprojectileList.Count < maxNumberOfProjectiles)
         {
+            projectileToAdd.tag = "CollectedSword";
             projectileToAdd.SetActive(false);
             proprojectileList.Add(projectileToAdd);
         }
-        DanceOfProjectiles.ActivateSword();
+        DanceOfProjectiles.ActivateSword();    // separate
+    }
+
+    IEnumerator ChangeSwordTag(GameObject tmpProjectile)
+    {
+        yield return new WaitForSeconds(1.0f);
+        tmpProjectile.tag = "Sword";
     }
 }

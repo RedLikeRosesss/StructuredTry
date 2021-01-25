@@ -12,6 +12,7 @@ TagManager:
   - OneWayPlatform
   - Sword
   - Enemy
+  - CollectedSword
   layers:
   - Default
   - TransparentFX
