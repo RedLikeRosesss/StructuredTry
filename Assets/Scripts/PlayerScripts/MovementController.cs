@@ -11,7 +11,9 @@ public class MovementController : MonoBehaviour
     [SerializeField]
     private float moveSpeedOnSandGround = 2.0f;
     [SerializeField]
-    private float maxSpeed = 10.0f;
+    private float maxSpeedForwardLook = 10.0f;
+    [SerializeField]
+    private float maxSpeedBackLook = 5.0f;
     [SerializeField]
     private GameObject player;
     [SerializeField]
@@ -19,13 +21,19 @@ public class MovementController : MonoBehaviour
 
     public void PlayerMove(Vector2 direction)
     {
+        MovementOnDifferentGround(direction);
+        MaxSpeedLimitConditions();
+    }
+
+    private void MovementOnDifferentGround(Vector2 direction)
+    {
         if (PlayerController.instance.PlayerGroundDetection.groundTag == "BaseGround")
         {
             MoveCharacterOnBaseGround(direction);
         }
         else if (PlayerController.instance.PlayerGroundDetection.groundTag == "SlideGround")
         {
-            MoveCharacterOnSlideGround(direction);
+            MoveCharacterOnSlideGround();
         }
         else if (PlayerController.instance.PlayerGroundDetection.groundTag == "SandGround")
         {
@@ -35,10 +43,27 @@ public class MovementController : MonoBehaviour
         {
             MoveCharacterOnBaseGround(direction);
         }
+    }
 
-        if (Mathf.Abs(PlayerController.instance.rb.velocity.x) > maxSpeed)
+    private void MaxSpeedLimitConditions()
+    {
+        if ((PlayerController.instance.rb.velocity.x > 0 && PlayerController.instance.PlayerAnimationContollerScript.facingRight) ||
+            (PlayerController.instance.rb.velocity.x < 0 && !PlayerController.instance.PlayerAnimationContollerScript.facingRight))
         {
-            PlayerController.instance.rb.velocity = new Vector2(Mathf.Sign(PlayerController.instance.rb.velocity.x) * maxSpeed, PlayerController.instance.rb.velocity.y);
+            MaxSpeedLimitation(maxSpeedForwardLook);
+        }
+        else if ((PlayerController.instance.rb.velocity.x > 0 && !PlayerController.instance.PlayerAnimationContollerScript.facingRight) ||
+            (PlayerController.instance.rb.velocity.x < 0 && PlayerController.instance.PlayerAnimationContollerScript.facingRight))
+        {
+            MaxSpeedLimitation(maxSpeedBackLook);
+        }
+    }
+
+    private void MaxSpeedLimitation(float speedLimit) 
+    {
+        if (Mathf.Abs(PlayerController.instance.rb.velocity.x) > speedLimit)
+        {
+            PlayerController.instance.rb.velocity = new Vector2(Mathf.Sign(PlayerController.instance.rb.velocity.x) * speedLimit, PlayerController.instance.rb.velocity.y);
         }
     }
 
@@ -48,7 +73,7 @@ public class MovementController : MonoBehaviour
             PlayerController.instance.rb.velocity.y);
     }
 
-    void MoveCharacterOnSlideGround(Vector2 direction)
+    void MoveCharacterOnSlideGround()
     {
         PlayerController.instance.rb.AddForce(Vector2.right * PlayerController.instance.PlayerInputScript.direction.x * moveSpeedOnSlideGround);
     }

@@ -4,35 +4,42 @@ using UnityEngine;
 
 public class ProjectileBehaviour : MonoBehaviour
 {
-    public GameObject startPos;
-    public float projectileSpeed = 20.0f;
-    private Vector3 target;
+    float projectileSpeed = 35.0f;
+    public string[] TagList = { "BaseGround", "SlideGround",  "SandGround"};
+    Rigidbody2D rb;
 
-    void Update()
+    private void Start()
     {
-        target = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
-            Input.mousePosition.y,
-            transform.position.z));
-        /*target = transform.GetComponent<Camera>().ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
-            Input.mousePosition.y,
-            transform.position.z));*/
+        rb = GetComponent<Rigidbody2D>();
+    }
 
-        Vector3 difference = target - startPos.transform.position;
+    public void ProjectileShooting(Vector3 mousePosition, Vector3 startPos)
+    {
+        Vector3 difference = mousePosition - startPos;
         float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+        float distance = difference.magnitude;
+        Vector2 direction = difference / distance;
+        direction.Normalize();
 
-        if (Input.GetMouseButtonDown(0))
+        transform.position = startPos;
+        transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
+        rb.velocity = direction * projectileSpeed;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        foreach (string TagToTest in TagList)
         {
-            float distance = difference.magnitude;
-            Vector2 direction = difference / distance;
-            direction.Normalize();
-            FireBullet(direction, rotationZ);
+            if (collision.gameObject.tag == TagToTest)
+            {
+                StartCoroutine(DelayForGroundPenetration());
+            }
         }
     }
 
-    void FireBullet(Vector2 direction, float rotationZ)
+    IEnumerator DelayForGroundPenetration()
     {
-        transform.position = startPos.transform.position;
-        transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
-        GetComponent<Rigidbody2D>().velocity = direction * projectileSpeed;
+        yield return new WaitForSeconds(0.01f);
+        rb.velocity = Vector2.zero;
     }
 }

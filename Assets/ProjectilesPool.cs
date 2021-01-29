@@ -6,13 +6,11 @@ using UnityEngine;
 
 public class ProjectilesPool : MonoBehaviour
 {
-    [SerializeField]
-    public int maxNumberOfProjectiles;
+    internal int maxNumberOfProjectiles;
+
     List<GameObject> proprojectileList = new List<GameObject>();
     [SerializeField]
-    internal DanceOfProjectiles DanceOfProjectiles;
-
-    public int count;
+    internal DanceOfProjectiles DanceOfProjectiles; 
 
     public static ProjectilesPool Instance { get; private set; }
 
@@ -35,11 +33,6 @@ public class ProjectilesPool : MonoBehaviour
         DanceOfProjectiles = FindObjectOfType<DanceOfProjectiles>();
     }
 
-    private void Update()
-    {
-        count = proprojectileList.Count;
-    }
-
     public GameObject GetProjectile()
     {
         if (proprojectileList.Count > 0) {
@@ -53,9 +46,9 @@ public class ProjectilesPool : MonoBehaviour
         if (proprojectileList != null)
         {
             StartCoroutine(ChangeSwordTag(proprojectileList[0]));
-            proprojectileList.RemoveAt(0);
-        }
-        DanceOfProjectiles.DeactivateSword();
+            DanceOfProjectiles.DeactivateSword();
+            proprojectileList.RemoveAt(0);            
+        }       
     }
 
     public void AddProjectile(GameObject projectileToAdd)
@@ -65,13 +58,13 @@ public class ProjectilesPool : MonoBehaviour
             projectileToAdd.tag = "CollectedSword";
             projectileToAdd.SetActive(false);
             proprojectileList.Add(projectileToAdd);
-        }
-        DanceOfProjectiles.ActivateSword();    // separate
+            DanceOfProjectiles.ActivateSword();
+        }       
     }
 
     IEnumerator ChangeSwordTag(GameObject tmpProjectile)
-    {
-        yield return new WaitForSeconds(1.0f);
+    {        
+        yield return new WaitForSeconds(0.5f);
         tmpProjectile.tag = "Sword";
     }
 }

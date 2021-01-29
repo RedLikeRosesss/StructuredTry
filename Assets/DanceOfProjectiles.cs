@@ -5,16 +5,13 @@ using UnityEngine;
 
 public class DanceOfProjectiles : MonoBehaviour
 {
-    public GameObject[] projectileSpriteObjects;
-
     private GameObject projectilePrefab;
 
-    public int indexForActivation;
-    private int ArraySize;
-    private int activeSwords;
+    private GameObject[] projectileSpriteObjects;
+    private int indexForActivation;
+    private int arraySize;
 
     public float timeCounter;
-    public float speed;
     public float size;
     public float x;
     public float y;
@@ -26,13 +23,12 @@ public class DanceOfProjectiles : MonoBehaviour
         CreateArrayOfSwords();
         indexForActivation = 0;
         size = 1f;
-        activeSwords = 0;
     }
 
     private void CreateArrayOfSwords()
     {
-        ArraySize = ProjectilesPool.Instance.maxNumberOfProjectiles;
-        projectileSpriteObjects = new GameObject[ArraySize];
+        arraySize = ProjectilesPool.Instance.maxNumberOfProjectiles;
+        projectileSpriteObjects = new GameObject[arraySize];
         for (int i = 0; i < projectileSpriteObjects.Length; i++)
         {
             projectileSpriteObjects[i] = Instantiate(projectilePrefab, transform.position, transform.rotation);
@@ -48,8 +44,7 @@ public class DanceOfProjectiles : MonoBehaviour
 
     private void DanceOff()
     {
-        //Debug.Log("DanceOff: " + ProjectilesPool.Instance.maxNumberOfProjectiles);
-        switch (activeSwords)
+        switch (indexForActivation)
         {
             case 1:
                 CalculateSwordRotation(0, 0.0f, 2.6f);
@@ -96,7 +91,6 @@ public class DanceOfProjectiles : MonoBehaviour
         {
             projectileSpriteObjects[indexForActivation].SetActive(true);
             indexForActivation++;
-            activeSwords++;
         }
         else
         {
@@ -110,12 +104,10 @@ public class DanceOfProjectiles : MonoBehaviour
         {
             projectileSpriteObjects[indexForActivation - 1].SetActive(false);
             indexForActivation--;
-            activeSwords--;
         }
         else
         {
             Debug.Log("Can't remove sword from danceOfSwords: no swords");
-        }
-        
+        }        
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerAnimationContollerScript : MonoBehaviour
 {
     private Animator animator;
-    private bool facingRight;
+    public bool facingRight;
     [SerializeField]
     private ParticleSystem rightDashParticles;
     [SerializeField]
@@ -32,7 +32,13 @@ public class PlayerAnimationContollerScript : MonoBehaviour
 
     private void DoPlayerNeedFlip()
     {
-        if ((PlayerController.instance.PlayerInputScript.direction.x > 0 && !facingRight) || (PlayerController.instance.PlayerInputScript.direction.x < 0 && facingRight))
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
+                Input.mousePosition.y,
+                transform.position.z));
+
+        Vector3 difference = mousePosition - transform.position;
+
+        if ( (difference.x >= 0 && !facingRight) || (difference.x < 0 && facingRight) ) 
         {
             Flip();
         }

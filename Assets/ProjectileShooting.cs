@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class ProjectileShooting : MonoBehaviour
 {
-    private void Update()
+    private Vector3 targetPosition;
+    private Vector3 worldPosition;
+
+    private void FixedUpdate()
     {
+        worldPosition = transform.position;
+
         if (Input.GetMouseButtonDown(0))
         {
-            Shoot();
+            targetPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
+                Input.mousePosition.y,
+                transform.position.z));
+            Shoot(targetPosition, worldPosition);
         }
     }
 
-    private void Shoot()
+    private void Shoot(Vector3 targetPos, Vector3 startPos)
     {
         var tempProjectile = ProjectilesPool.Instance.GetProjectile();
         if (tempProjectile != null)
@@ -21,7 +29,7 @@ public class ProjectileShooting : MonoBehaviour
             tempProjectile.transform.rotation = transform.rotation;
             tempProjectile.transform.position = transform.position;
             tempProjectile.gameObject.SetActive(true);
-            tempProjectile.GetComponent<ProjectileBehaviour>().enabled = true;            
+            tempProjectile.GetComponent<ProjectileBehaviour>().ProjectileShooting(targetPos, startPos);
         }        
     }
 }
