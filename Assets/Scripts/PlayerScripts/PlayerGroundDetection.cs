@@ -5,41 +5,50 @@ using UnityEngine;
 public class PlayerGroundDetection : MonoBehaviour
 {
     [SerializeField]
+    private bool onGround;  //delete in the future
+    [SerializeField]
     private LayerMask groundLayer;
     [SerializeField]
     internal string groundTag;
     [SerializeField]
-    private float lossyScaleChange = 0.02f;    
-    private float detectionOffsetLeft = -0.5f;    
-    private float detectionOffsetRight = 0.5f;    
-    private float detectionOffsetMiddle = 0f;
+    private float lossyScaleChange;
+    [SerializeField]
+    private float distance;
+    [SerializeField]
+    private Vector2 boxCastSize;
 
     private void Start()
-    { 
+    {        
+        lossyScaleChange = 0.1f;
+        boxCastSize = new Vector2(gameObject.transform.lossyScale.x - lossyScaleChange, gameObject.transform.lossyScale.y - lossyScaleChange);
+        distance = 0.1f;
+        onGround = false;
         groundLayer = LayerMask.GetMask("Ground", "SlideGround", "SandGround", "MovingPlatform", "OneWayPlatform");
     }
 
     public bool isGrounded()
     {
-        RaycastHit2D raycastHitLeft = GetRaycastHit(detectionOffsetLeft);
-        RaycastHit2D raycastHitRight = GetRaycastHit(detectionOffsetRight);
-        return (raycastHitLeft.collider != null) || (raycastHitRight.collider != null);
+        RaycastHit2D raycastHit = GetRaycastHit();
+        onGround = raycastHit;
+        return raycastHit.collider != null;
     }
 
     public void DetectTypeOfGround()
     {
-        RaycastHit2D raycastHit = GetRaycastHit(detectionOffsetMiddle);
+        RaycastHit2D raycastHit = GetRaycastHit();
         if (raycastHit.collider != null)
         {
             groundTag = raycastHit.collider.tag;
         }
     }
 
-    private RaycastHit2D GetRaycastHit(float detectionOffset)
+    private RaycastHit2D GetRaycastHit()
     {
-        return Physics2D.Raycast(new Vector2(transform.position.x + detectionOffset, transform.position.y + 0.02f - transform.lossyScale.x / 2),
+        return Physics2D.BoxCast(gameObject.transform.position,
+            boxCastSize,
+            0f,
             Vector2.down,
-            0.05f,
+            distance,
             groundLayer);
     }
 }
