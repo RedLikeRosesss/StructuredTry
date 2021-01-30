@@ -28,10 +28,12 @@ public class ProjectileBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(collision.gameObject.tag);
+        Debug.Log(collision.gameObject.transform.position);
         foreach (string TagToTest in TagList)
         {
             if (collision.gameObject.tag == TagToTest)
-            {
+            {                
                 StartCoroutine(DelayForGroundPenetration());
             }
         }
@@ -39,7 +41,7 @@ public class ProjectileBehaviour : MonoBehaviour
 
     IEnumerator DelayForGroundPenetration()
     {
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0f);
         rb.velocity = Vector2.zero;
     }
 }

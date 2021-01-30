@@ -13,15 +13,15 @@ public class PlayerGroundDetection : MonoBehaviour
     [SerializeField]
     private float lossyScaleChange;
     [SerializeField]
-    private float distance;
+    private float distanceToDraw;
     [SerializeField]
     private Vector2 boxCastSize;
 
     private void Start()
     {        
-        lossyScaleChange = 0.1f;
-        boxCastSize = new Vector2(gameObject.transform.lossyScale.x - lossyScaleChange, gameObject.transform.lossyScale.y - lossyScaleChange);
-        distance = 0.1f;
+        lossyScaleChange = 0.12f;
+        boxCastSize = new Vector2(gameObject.transform.lossyScale.x / 2, lossyScaleChange);
+        distanceToDraw = 0f;
         onGround = false;
         groundLayer = LayerMask.GetMask("Ground", "SlideGround", "SandGround", "MovingPlatform", "OneWayPlatform");
     }
@@ -44,11 +44,18 @@ public class PlayerGroundDetection : MonoBehaviour
 
     private RaycastHit2D GetRaycastHit()
     {
-        return Physics2D.BoxCast(gameObject.transform.position,
+        return Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y - transform.lossyScale.y / 2),
             boxCastSize,
             0f,
             Vector2.down,
-            distance,
+            distanceToDraw,
             groundLayer);
     }
+
+    /*private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawCube(new Vector2(transform.position.x, transform.position.y - transform.lossyScale.y / 2),
+            new Vector2(gameObject.transform.lossyScale.x / 2, 0.12f));
+    }*/
 }

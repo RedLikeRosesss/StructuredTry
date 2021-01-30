@@ -7,7 +7,7 @@ public class ProjectileShooting : MonoBehaviour
     private Vector3 targetPosition;
     private Vector3 worldPosition;
 
-    private void FixedUpdate()
+    private void Update()
     {
         worldPosition = transform.position;
 
