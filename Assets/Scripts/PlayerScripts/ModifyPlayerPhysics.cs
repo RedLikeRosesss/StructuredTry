@@ -32,7 +32,7 @@ public class ModifyPlayerPhysics : MonoBehaviour
 
     internal void ModifyPh()
     {
-        if (PlayerController.instance.PlayerGroundDetection.isGrounded())
+        if (PlayerController.instance.PlayerGroundDetection.IsGrounded())
         {
             PlayerController.instance.rb.gravityScale = normalGravityScale;
         }
@@ -79,7 +79,7 @@ public class ModifyPlayerPhysics : MonoBehaviour
             if (windZone != null)
             {
                 PlayerController.instance.PlayerDash.dashPower = TowardsTheWindDashPower;
-                if (PlayerController.instance.PlayerGroundDetection.isGrounded() == true)
+                if (PlayerController.instance.PlayerGroundDetection.IsGrounded() == true)
                 {
                     windZone.forceMagnitude = windMagnitudeOnTheGround;
                 }

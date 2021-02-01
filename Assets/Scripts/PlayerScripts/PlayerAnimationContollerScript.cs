@@ -74,7 +74,7 @@ public class PlayerAnimationContollerScript : MonoBehaviour
 
     internal void OnGroundAnimation()
     {
-        if (PlayerController.instance.PlayerGroundDetection.isGrounded())
+        if (PlayerController.instance.PlayerGroundDetection.IsGrounded())
         {
             animator.SetBool("isFall", false);
             animator.SetBool("isGrounded", true);

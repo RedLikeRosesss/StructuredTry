@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerGroundDetection : MonoBehaviour
+public class PlayerGroundDetection : MonoBehaviour   //ChangeName
 {
     [SerializeField]
     private bool onGround;  //delete in the future
@@ -11,23 +11,27 @@ public class PlayerGroundDetection : MonoBehaviour
     [SerializeField]
     internal string groundTag;
     [SerializeField]
-    private float lossyScaleChange;
+    private float boxHeight;
     [SerializeField]
     private float distanceToDraw;
     [SerializeField]
-    private Vector2 boxCastSize;
+    private Vector2 groundBoxSize;
+    [SerializeField]
+    private Vector2 groundBoxOriginPosition;
 
     private void Start()
-    {        
-        lossyScaleChange = 0.12f;
-        boxCastSize = new Vector2(gameObject.transform.lossyScale.x / 2, lossyScaleChange);
-        distanceToDraw = 0f;
+    {
+        boxHeight = 0.12f;
+        groundBoxSize = new Vector2(transform.lossyScale.x / 2, boxHeight);        
+        distanceToDraw = 0.0f;
         onGround = false;
         groundLayer = LayerMask.GetMask("Ground", "SlideGround", "SandGround", "MovingPlatform", "OneWayPlatform");
     }
 
-    public bool isGrounded()
+    public bool IsGrounded()
     {
+        groundBoxOriginPosition = new Vector2(transform.position.x, transform.position.y - transform.lossyScale.y / 2);
+
         RaycastHit2D raycastHit = GetRaycastHit();
         onGround = raycastHit;
         return raycastHit.collider != null;
@@ -43,13 +47,8 @@ public class PlayerGroundDetection : MonoBehaviour
     }
 
     private RaycastHit2D GetRaycastHit()
-    {
-        return Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y - transform.lossyScale.y / 2),
-            boxCastSize,
-            0f,
-            Vector2.down,
-            distanceToDraw,
-            groundLayer);
+    {        
+        return Physics2D.BoxCast(groundBoxOriginPosition, groundBoxSize, 0f, Vector2.down, distanceToDraw, groundLayer);
     }
 
     /*private void OnDrawGizmos()

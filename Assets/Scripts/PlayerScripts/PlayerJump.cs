@@ -38,7 +38,7 @@ public class PlayerJump : MonoBehaviour
 
     private void WhenToJump()
     {
-        if (jumpsCounter == 2 && PlayerController.instance.PlayerGroundDetection.isGrounded() == false)
+        if (jumpsCounter == 2 && PlayerController.instance.PlayerGroundDetection.IsGrounded() == false)
         {
 
         }
@@ -50,7 +50,7 @@ public class PlayerJump : MonoBehaviour
 
     private void JumpWithDelay()
     {
-        if (jumpTimer > Time.time && jumpsCounter == 0 && PlayerController.instance.PlayerGroundDetection.isGrounded() == true)
+        if (jumpTimer > Time.time && jumpsCounter == 0 && PlayerController.instance.PlayerGroundDetection.IsGrounded() == true)
         {
             jumpsCounter = jumpsCounterValue;
             JumpAction();
@@ -86,7 +86,7 @@ public class PlayerJump : MonoBehaviour
 
     public void SetJumpsCounter()
     {
-        if (PlayerController.instance.PlayerGroundDetection.isGrounded() == true)
+        if (PlayerController.instance.PlayerGroundDetection.IsGrounded() == true)
         {
             jumpsCounter = jumpsCounterValue;
         }

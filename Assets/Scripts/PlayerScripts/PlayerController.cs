@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        PlayerGroundDetection.isGrounded();
+        PlayerGroundDetection.IsGrounded();
         PlayerGroundDetection.DetectTypeOfGround();
         ModifyPlayerPhysics.ModifyPh();
         MoveControl.PlayerMove(PlayerInputScript.GetHorizontalInput());

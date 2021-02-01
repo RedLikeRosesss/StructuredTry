@@ -28,8 +28,6 @@ public class ProjectileBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject.tag);
-        Debug.Log(collision.gameObject.transform.position);
         foreach (string TagToTest in TagList)
         {
             if (collision.gameObject.tag == TagToTest)
