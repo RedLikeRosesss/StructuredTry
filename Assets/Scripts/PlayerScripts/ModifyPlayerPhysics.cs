@@ -32,9 +32,9 @@ public class ModifyPlayerPhysics : MonoBehaviour
 
     internal void ModifyPh()
     {
-        if (PlayerController.instance.PlayerGroundDetection.IsGrounded())
+        if (PlayerController.Instance.PlayerGroundDetection.IsTouchingSurface())
         {
-            PlayerController.instance.rb.gravityScale = normalGravityScale;
+            PlayerController.Instance.rb.gravityScale = normalGravityScale;
         }
         else
         {
@@ -44,21 +44,21 @@ public class ModifyPlayerPhysics : MonoBehaviour
 
     private void ChangeGravityScale()
     {
-        if (PlayerController.instance.PlayerDash.wannaDash && Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0)
+        if (PlayerController.Instance.PlayerDash.wannaDash && Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0)
         {
-            PlayerController.instance.rb.gravityScale = dashGravityScale;
+            PlayerController.Instance.rb.gravityScale = dashGravityScale;
         }
-        else if (PlayerController.instance.rb.velocity.y < 0)
+        else if (PlayerController.Instance.rb.velocity.y < 0)
         {
-            PlayerController.instance.rb.gravityScale = fallMultiplier;
+            PlayerController.Instance.rb.gravityScale = fallMultiplier;
         }
-        else if (PlayerController.instance.rb.velocity.y > 0 && !Input.GetButton("Jump"))
+        else if (PlayerController.Instance.rb.velocity.y > 0 && !Input.GetButton("Jump"))
         {
-            PlayerController.instance.rb.gravityScale = lowJumpMultiplier;
+            PlayerController.Instance.rb.gravityScale = lowJumpMultiplier;
         }
         else
         {
-            PlayerController.instance.rb.gravityScale = normalGravityScale;
+            PlayerController.Instance.rb.gravityScale = normalGravityScale;
         }
     }
 
@@ -78,8 +78,8 @@ public class ModifyPlayerPhysics : MonoBehaviour
             AreaEffector2D windZone = collision.GetComponent<AreaEffector2D>();
             if (windZone != null)
             {
-                PlayerController.instance.PlayerDash.dashPower = TowardsTheWindDashPower;
-                if (PlayerController.instance.PlayerGroundDetection.IsGrounded() == true)
+                PlayerController.Instance.PlayerDash.dashPower = TowardsTheWindDashPower;
+                if (PlayerController.Instance.PlayerGroundDetection.IsTouchingSurface() == true)
                 {
                     windZone.forceMagnitude = windMagnitudeOnTheGround;
                 }
@@ -102,7 +102,7 @@ public class ModifyPlayerPhysics : MonoBehaviour
             AreaEffector2D windZone = collision.GetComponent<AreaEffector2D>();
             if (windZone != null)
             {
-                PlayerController.instance.PlayerDash.dashPower = standartDashPower;
+                PlayerController.Instance.PlayerDash.dashPower = standartDashPower;
                 windZone.forceMagnitude = windMagnitudeOnTheGround;
             }
         }

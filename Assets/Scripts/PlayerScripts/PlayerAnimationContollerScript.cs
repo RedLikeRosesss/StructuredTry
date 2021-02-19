@@ -65,7 +65,7 @@ public class PlayerAnimationContollerScript : MonoBehaviour
 
     internal void FallAnimation()
     {
-        if (PlayerController.instance.rb.velocity.y < -0.1f)
+        if (PlayerController.Instance.rb.velocity.y < -0.1f)
         {
             animator.SetBool("isSingleJump", false);
             animator.SetBool("isFall", true);
@@ -74,7 +74,7 @@ public class PlayerAnimationContollerScript : MonoBehaviour
 
     internal void OnGroundAnimation()
     {
-        if (PlayerController.instance.PlayerGroundDetection.IsGrounded())
+        if (PlayerController.Instance.PlayerGroundDetection.IsTouchingSurface())
         {
             animator.SetBool("isFall", false);
             animator.SetBool("isGrounded", true);
@@ -89,7 +89,7 @@ public class PlayerAnimationContollerScript : MonoBehaviour
 
     internal void HorizontalAxisTrack()
     {
-        animator.SetFloat("horizontal", Mathf.Abs(PlayerController.instance.rb.velocity.x));
+        animator.SetFloat("horizontal", Mathf.Abs(PlayerController.Instance.rb.velocity.x));
         if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0)
         {
             animator.SetBool("isRun", true);
@@ -102,12 +102,12 @@ public class PlayerAnimationContollerScript : MonoBehaviour
 
     internal void CreateDashTrack()
     {
-        if (PlayerController.instance.rb.velocity.x > 0)
+        if (PlayerController.Instance.rb.velocity.x > 0)
         {
             rightDashTrack.Play();
             rightDashParticles.Play();            
         }
-        else if (PlayerController.instance.rb.velocity.x < 0)
+        else if (PlayerController.Instance.rb.velocity.x < 0)
         {
             leftDashTrack.Play();
             leftDashParticles.Play();            

@@ -13,22 +13,22 @@ public class PlayerInputScript : MonoBehaviour
         return direction;
     }
 
-    public void SetWannaJump()
+    public void JumpPreparation()
     {
         if (Input.GetButtonDown("Jump"))
         {
-            PlayerController.instance.PlayerJump.wannaJump = true;
-            PlayerController.instance.PlayerJump.jumpTimer = Time.time + PlayerController.instance.PlayerJump.jumpDelay;
+            PlayerController.Instance.PlayerJump.wannaJump = true;
+            PlayerController.Instance.PlayerJump.jumpTimer = Time.time + PlayerController.Instance.PlayerJump.jumpDelay;
         }
     }
 
-    public void SetWannaDash()
+    public void DashPeparation()
     {
-        if (Time.time >= PlayerController.instance.PlayerDash.nextDashTime)
+        if (Time.time >= PlayerController.Instance.PlayerDash.nextDashTime)
         {
             if (Input.GetButtonDown("Fire2"))
             {
-                PlayerController.instance.PlayerDash.DashPreparation();
+                PlayerController.Instance.PlayerDash.DashPreparation();
             }
         }
     }
@@ -37,5 +37,4 @@ public class PlayerInputScript : MonoBehaviour
     {
         return Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S);
     }
-
 }

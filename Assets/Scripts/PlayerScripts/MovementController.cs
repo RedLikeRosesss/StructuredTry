@@ -27,15 +27,15 @@ public class MovementController : MonoBehaviour
 
     private void MovementOnDifferentGround(Vector2 direction)
     {
-        if (PlayerController.instance.PlayerGroundDetection.groundTag == "BaseGround")
+        if (PlayerController.Instance.PlayerGroundDetection.surfaceTag == "BaseGround")
         {
             MoveCharacterOnBaseGround(direction);
         }
-        else if (PlayerController.instance.PlayerGroundDetection.groundTag == "SlideGround")
+        else if (PlayerController.Instance.PlayerGroundDetection.surfaceTag == "SlideGround")
         {
             MoveCharacterOnSlideGround();
         }
-        else if (PlayerController.instance.PlayerGroundDetection.groundTag == "SandGround")
+        else if (PlayerController.Instance.PlayerGroundDetection.surfaceTag == "SandGround")
         {
             MoveCharacterOnSandGround(direction);
         }
@@ -47,13 +47,13 @@ public class MovementController : MonoBehaviour
 
     private void MaxSpeedLimitConditions()
     {
-        if ((PlayerController.instance.rb.velocity.x > 0 && PlayerController.instance.PlayerAnimationContollerScript.facingRight) ||
-            (PlayerController.instance.rb.velocity.x < 0 && !PlayerController.instance.PlayerAnimationContollerScript.facingRight))
+        if ((PlayerController.Instance.rb.velocity.x > 0 && PlayerController.Instance.PlayerAnimationContollerScript.facingRight) ||
+            (PlayerController.Instance.rb.velocity.x < 0 && !PlayerController.Instance.PlayerAnimationContollerScript.facingRight))
         {
             MaxSpeedLimitation(maxSpeedForwardLook);
         }
-        else if ((PlayerController.instance.rb.velocity.x > 0 && !PlayerController.instance.PlayerAnimationContollerScript.facingRight) ||
-            (PlayerController.instance.rb.velocity.x < 0 && PlayerController.instance.PlayerAnimationContollerScript.facingRight))
+        else if ((PlayerController.Instance.rb.velocity.x > 0 && !PlayerController.Instance.PlayerAnimationContollerScript.facingRight) ||
+            (PlayerController.Instance.rb.velocity.x < 0 && PlayerController.Instance.PlayerAnimationContollerScript.facingRight))
         {
             MaxSpeedLimitation(maxSpeedBackLook);
         }
@@ -61,27 +61,27 @@ public class MovementController : MonoBehaviour
 
     private void MaxSpeedLimitation(float speedLimit) 
     {
-        if (Mathf.Abs(PlayerController.instance.rb.velocity.x) > speedLimit)
+        if (Mathf.Abs(PlayerController.Instance.rb.velocity.x) > speedLimit)
         {
-            PlayerController.instance.rb.velocity = new Vector2(Mathf.Sign(PlayerController.instance.rb.velocity.x) * speedLimit, PlayerController.instance.rb.velocity.y);
+            PlayerController.Instance.rb.velocity = new Vector2(Mathf.Sign(PlayerController.Instance.rb.velocity.x) * speedLimit, PlayerController.Instance.rb.velocity.y);
         }
     }
 
     void MoveCharacterOnBaseGround(Vector2 direction)
     {
-        PlayerController.instance.rb.velocity = new Vector2(direction.x * moveSpeedOnBaseGround, 
-            PlayerController.instance.rb.velocity.y);
+        PlayerController.Instance.rb.velocity = new Vector2(direction.x * moveSpeedOnBaseGround, 
+            PlayerController.Instance.rb.velocity.y);
     }
 
     void MoveCharacterOnSlideGround()
     {
-        PlayerController.instance.rb.AddForce(Vector2.right * PlayerController.instance.PlayerInputScript.direction.x * moveSpeedOnSlideGround);
+        PlayerController.Instance.rb.AddForce(Vector2.right * PlayerController.Instance.PlayerInputScript.direction.x * moveSpeedOnSlideGround);
     }
 
     void MoveCharacterOnSandGround(Vector2 direction)
     {
-        PlayerController.instance.rb.velocity = new Vector2(direction.x * moveSpeedOnSandGround,
-            PlayerController.instance.rb.velocity.y);
+        PlayerController.Instance.rb.velocity = new Vector2(direction.x * moveSpeedOnSandGround,
+            PlayerController.Instance.rb.velocity.y);
     }
 
     #region CollisionForMovingPlatformAndOneWayPlatform
@@ -97,7 +97,7 @@ public class MovementController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("OneWayPlatform"))
         {
-            if (PlayerController.instance.PlayerInputScript.WantDown())
+            if (PlayerController.Instance.PlayerInputScript.WantDown())
             {
                 tempCollider = collision.collider;
                 StartCoroutine(FallTimer());
@@ -116,8 +116,8 @@ public class MovementController : MonoBehaviour
 
     IEnumerator FallTimer()
     {
-        Physics2D.IgnoreCollision(tempCollider, PlayerController.instance.bc, true);
+        Physics2D.IgnoreCollision(tempCollider, PlayerController.Instance.bc, true);
         yield return new WaitForSeconds(0.5f);
-        Physics2D.IgnoreCollision(tempCollider, PlayerController.instance.bc, false);
+        Physics2D.IgnoreCollision(tempCollider, PlayerController.Instance.bc, false);
     }
 }

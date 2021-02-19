@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     internal PlayerGroundDetection PlayerGroundDetection;
     [SerializeField]
+    internal PlayerWallDetection PlayerWallDetection;
+    [SerializeField]
     internal ModifyPlayerPhysics ModifyPlayerPhysics;
     [SerializeField]
     internal PlayerAnimationContollerScript PlayerAnimationContollerScript;
@@ -25,14 +27,14 @@ public class PlayerController : MonoBehaviour
     internal BoxCollider2D bc;
 
     [Header("TheRest")]
-    public static PlayerController instance;
+    public static PlayerController Instance;
     public Vector2 check;
 
     void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         else
         {
@@ -49,6 +51,7 @@ public class PlayerController : MonoBehaviour
         PlayerInputScript = gameObject.GetComponent<PlayerInputScript>();
         PlayerJump = gameObject.GetComponent<PlayerJump>();
         PlayerGroundDetection = gameObject.GetComponent<PlayerGroundDetection>();
+        PlayerWallDetection = gameObject.GetComponent<PlayerWallDetection>();
         ModifyPlayerPhysics = gameObject.GetComponent<ModifyPlayerPhysics>();
         PlayerAnimationContollerScript = gameObject.GetComponent<PlayerAnimationContollerScript>();
         PlayerDash = gameObject.GetComponent<PlayerDash>();
@@ -56,16 +59,18 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        PlayerInputScript.SetWannaJump();
-        PlayerInputScript.SetWannaDash();
+        PlayerInputScript.JumpPreparation();
+        PlayerInputScript.DashPeparation();
         PlayerAnimationContollerScript.ChangeAnimation();
         check = new Vector2(rb.velocity.x, rb.velocity.y);
     }
 
     private void FixedUpdate()
     {
-        PlayerGroundDetection.IsGrounded();
-        PlayerGroundDetection.DetectTypeOfGround();
+        PlayerGroundDetection.IsTouchingSurface();
+        PlayerGroundDetection.DetectTypeOfSurface();
+        PlayerWallDetection.IsTouchingSurface();
+        PlayerWallDetection.DetectTypeOfSurface();
         ModifyPlayerPhysics.ModifyPh();
         MoveControl.PlayerMove(PlayerInputScript.GetHorizontalInput());
         PlayerJump.SetJumpsCounter();

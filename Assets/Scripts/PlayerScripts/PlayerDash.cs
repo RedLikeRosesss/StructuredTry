@@ -35,8 +35,8 @@ public class PlayerDash : MonoBehaviour
         {
             if (dashTimer > Time.time)
             {
-                PlayerController.instance.PlayerAnimationContollerScript.CreateDashTrack();
-                PlayerController.instance.rb.velocity = new Vector2(PlayerController.instance.rb.velocity.x * dashPower, yVelocityFix);
+                PlayerController.Instance.PlayerAnimationContollerScript.CreateDashTrack();
+                PlayerController.Instance.rb.velocity = new Vector2(PlayerController.Instance.rb.velocity.x * dashPower, yVelocityFix);
             }
             else
             {
@@ -51,6 +51,6 @@ public class PlayerDash : MonoBehaviour
         wannaDash = true;
         dashTimer = Time.time + dashDuration;
         nextDashTime = Time.time + 1f / dashRate;
-        yVelocityFix = PlayerController.instance.rb.velocity.y;
+        yVelocityFix = PlayerController.Instance.rb.velocity.y;
     }
 }
